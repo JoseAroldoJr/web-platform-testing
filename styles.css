@@ -9,7 +9,30 @@ body {
 }
 
 .container {
-  margin: 200px auto;
-  width: 500px;
-  height: 60px
+  
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+}
+.areaDeBusca {
+  width: 100%;
+  padding: 10px 35px 10px 15px;
+  border: none;
+  border-radius: 100px;
+  outline: none;
+}
+
+.busca {
+  background: transparent;
+  border: none;
+  outline: none;
+  margin-left: -33px;
+}
+
+.busca img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
 }
