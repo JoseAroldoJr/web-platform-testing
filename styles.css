@@ -1,38 +1,51 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
+  font-family:'Times New Roman', Times, serif;
 }
 
 body {
   background: #7e8599;
 }
 
-.container {
-  
-}
-
-.form {
+form {
+  background-color: #c7cad1;
+  border-radius: 50px;
+  margin-top: 20px;
+  padding: 20px;
   display: flex;
-  flex-direction: row;
-}
-.areaDeBusca {
-  width: 100%;
-  padding: 10px 35px 10px 15px;
-  border: none;
-  border-radius: 100px;
-  outline: none;
+
 }
 
-.busca {
-  background: transparent;
+form input {
+  padding: 8px;
   border: none;
   outline: none;
-  margin-left: -33px;
+
 }
 
-.busca img {
-  width: 20px;
-  height: 20px;
-  object-fit: cover;
+form button {
+  padding: 10px 20px;
+  border: none;
+
+}
+
+div.movieList {
+  text-align: end;
+  padding: 10px;
+  width: 150px;
+  margin: 3px;
+
+}
+
+div.movieList img {
+  width: 150%;
+
+}
+
+div.movieList:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+
 }
