@@ -4,7 +4,85 @@
     <title>Busca de filmes</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="styles.css" />
+    <style>
+          * {
+        margin: 0;
+        padding: 0;
+        font-family: Roboto;
+      }
+      
+      body {
+        background: #272f47;
+      }
+
+      form {
+        display: flex;
+        flex-direction: row;
+        margin: 200px auto;
+        width: 500px;
+        height: 40px;
+        border-radius: 100px;
+        margin-top: 20px;
+        margin-bottom: 20px
+
+      }
+
+      form input {
+        width: 100%;
+        padding: 10px 35px 10px 15px;
+        border: none;
+        border-radius: 100px;
+        outline: 20px;
+
+      }
+
+      form button {
+        background: transparent;
+        border: none;
+        outline: none;
+        margin-left: -33px;
+
+      }
+
+      div.movieList {
+        display: flex;
+        padding: 8px;
+        margin-top: 8px;
+        flex-wrap: wrap;
+        justify-content:left;
+
+      }
+
+      div.filmes{
+
+        text-align: center;
+        align-items: center;
+        padding: 15px;
+        width: 170px;
+
+      }
+
+      div.filmes img{
+        width: 100%;
+      }
+      
+      div.filmes:hover {
+        transform: scale(1.08);
+        cursor: pointer;
+
+      }
+
+      h1 {
+        color: blanchedalmond;
+        text-align: center;
+        
+      }
+
+      h3 {
+        color:antiquewhite
+
+      }
+    </style>
   </head>
   <body>
     <h1>MSB</h1>
@@ -14,61 +92,68 @@
     </form>
     <div class="movieList"></div> 
     <button id="loadMoreBtn" style="display: none;">Load More</button>
-  </body>
-  <script>
-    const formBusca = document.querySelector("form");
-    const list = document.querySelector("div.movieList");
-    const loadMoreBtn = document.getElementById("loadMoreBtn");
-
-    let chave = 'ee49f034';
-    let paginaAtual = 1;
-
-    formBusca.onsubmit = (evento) => {
-      evento.preventDefault();
-      paginaAtual = 1;
-      searchMovies();
-    };
-
-    function searchMovies() {
-      const busca = formBusca.elements.buscar.value;
-
-      if (busca === "") {
-        alert("É necessário digitar algo");
-        return;
+    <script>
+      const formBusca = document.querySelector("form");
+      const list = document.querySelector("div.movieList");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      const chave = 'ee49f034';
+      let paginaAtual = 1;
+  
+      formBusca.onsubmit = (evento) => {
+        evento.preventDefault();
+        paginaAtual = 1;
+        searchMovies();
+      };
+  
+      function searchMovies() {
+        const busca = formBusca.elements.buscar.value;
+  
+        if (busca === "") {
+          alert("É necessário digitar algo");
+          return;
+        }
+  
+        fetch(`https://www.omdbapi.com/?s=${busca}&apikey=${chave}&page=${paginaAtual}`)
+          .then(resultado => resultado.json())
+          .then(json => {
+            mostrarFilmes(json);
+  
+            if (json.Search && json.Search.length > 0) {
+              loadMoreBtn.style.display = "block";
+            } else {
+              loadMoreBtn.style.display = "none";
+            }
+          });
       }
+  
+      function mostrarFilmes(json) {
+        if (paginaAtual === 1) {
+          list.innerHTML = "";
+        }
 
-      fetch(`http://www.omdbapi.com/?s=${busca}&apikey=${chave}&page=${paginaAtual}`)
-        .then(resultado => resultado.json())
-        .then(json => {
-          mostrarFilmes(json);
+        if (json.Response === "False") {
+          const message = document.createElement("p");
+          message.textContent = "Nothing found";
+          message.classList.add("not-found");
+          list.appendChild(message);
+        } else {
+            json.Search.forEach(element => {
+            let filmes = document.createElement("div");
+            filmes.classList.add("filmes");
+    
+            let googleSearchLink = `https://www.google.com/search?q=${encodeURIComponent(element.Title)}`;
+    
+            filmes.innerHTML = `<a href="${googleSearchLink}" target="_blank"><img src="${element.Poster}"/></a><h3>${element.Title}</h3>`;
+            list.appendChild(filmes);
+          });
+        }
 
-          if (json.Search && json.Search.length > 0) {
-            loadMoreBtn.style.display = "block";
-          } else {
-            loadMoreBtn.style.display = "none";
-          }
-        });
-    }
-
-    function mostrarFilmes(json) {
-      if (paginaAtual === 1) {
-        list.innerHTML = "";
       }
-
-      json.Search.forEach(element => {
-        let filmes = document.createElement("div");
-        filmes.classList.add("filmes");
-
-        let googleSearchLink = `https://www.google.com/search?q=${encodeURIComponent(element.Title)}`;
-
-        filmes.innerHTML = `<a href="${googleSearchLink}" target="_blank"><img src="${element.Poster}"/></a><h2>${element.Title}</h2>`;
-        list.appendChild(filmes);
+  
+      loadMoreBtn.addEventListener("click", () => {
+        paginaAtual++;
+        searchMovies();
       });
-    }
-
-    loadMoreBtn.addEventListener("click", () => {
-      paginaAtual++;
-      searchMovies();
-    });
-  </script>
+    </script>
+  </body>
 </html>
