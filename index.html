@@ -1,159 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Busca de filmes</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <style>
-          * {
-        margin: 0;
-        padding: 0;
-        font-family: Roboto;
-      }
-      
-      body {
-        background: #272f47;
-      }
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Currículo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-      form {
-        display: flex;
-        flex-direction: row;
-        margin: 200px auto;
-        width: 500px;
-        height: 40px;
-        border-radius: 100px;
-        margin-top: 20px;
-        margin-bottom: 20px
+    header {
+      background-color: #162A3E;
+      color: #fff;
+      padding: 20px;
+    }
 
-      }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
 
-      form input {
-        width: 100%;
-        padding: 10px 35px 10px 15px;
-        border: none;
-        border-radius: 100px;
-        outline: 20px;
+    .contact {
+      margin-top: 10px;
+      font-size: 16px;
+    }
 
-      }
+    section {
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+    }
 
-      form button {
-        background: transparent;
-        border: none;
-        outline: none;
-        margin-left: -33px;
+    h2 {
+      margin: 0;
+      font-size: 24px;
+    }
 
-      }
+    p {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Seu Nome</h1>
+    <div class="contact">
+      E-mail: seuemail@example.com | Telefone: (00) 1234-5678
+    </div>
+  </header>
 
-      div.movieList {
-        display: flex;
-        padding: 8px;
-        margin-top: 8px;
-        flex-wrap: wrap;
-        justify-content:left;
+  <section>
+    <h2>Sobre Mim</h2>
+    <p>Aqui você pode falar um pouco sobre si mesmo, sua experiência, formação acadêmica, objetivos profissionais, etc.</p>
+  </section>
 
-      }
+  <section>
+    <h2>Habilidades</h2>
+    <p>Aqui você pode listar as habilidades que você domina, como por exemplo: habilidades técnicas, conhecimentos em softwares, idiomas, etc.</p>
+  </section>
 
-      div.filmes{
-
-        text-align: center;
-        align-items: center;
-        padding: 15px;
-        width: 170px;
-
-      }
-
-      div.filmes img{
-        width: 100%;
-      }
-      
-      div.filmes:hover {
-        transform: scale(1.08);
-        cursor: pointer;
-
-      }
-
-      h1 {
-        color: blanchedalmond;
-        text-align: center;
-        
-      }
-
-      h3 {
-        color:antiquewhite
-
-      }
-    </style>
-  </head>
-  <body>
-    <h1>MSB</h1>
-    <form>
-      <input name="buscar" placeholder="Digite o nome do filme">
-      <button>Buscar</button>
-    </form>
-    <div class="movieList"></div> 
-    <button id="loadMoreBtn" style="display: none;">Load More</button>
-    <script>
-      const formBusca = document.querySelector("form");
-      const list = document.querySelector("div.movieList");
-      const loadMoreBtn = document.getElementById("loadMoreBtn");
-      const chave = 'ee49f034';
-      let paginaAtual = 1;
-  
-      formBusca.onsubmit = (evento) => {
-        evento.preventDefault();
-        paginaAtual = 1;
-        searchMovies();
-      };
-  
-      function searchMovies() {
-        const busca = formBusca.elements.buscar.value;
-  
-        if (busca === "") {
-          alert("É necessário digitar algo");
-          return;
-        }
-  
-        fetch(`https://www.omdbapi.com/?s=${busca}&apikey=${chave}&page=${paginaAtual}`)
-          .then(resultado => resultado.json())
-          .then(json => {
-            mostrarFilmes(json);
-  
-            if (json.Search && json.Search.length > 0) {
-              loadMoreBtn.style.display = "block";
-            } else {
-              loadMoreBtn.style.display = "none";
-            }
-          });
-      }
-  
-      function mostrarFilmes(json) {
-        if (paginaAtual === 1) {
-          list.innerHTML = "";
-        }
-
-        if (json.Response === "False") {
-          const message = document.createElement("p");
-          message.textContent = "Nothing found";
-          message.classList.add("not-found");
-          list.appendChild(message);
-        } else {
-            json.Search.forEach(element => {
-            let filmes = document.createElement("div");
-            filmes.classList.add("filmes");
-    
-            let googleSearchLink = `https://www.google.com/search?q=${encodeURIComponent(element.Title)}`;
-    
-            filmes.innerHTML = `<a href="${googleSearchLink}" target="_blank"><img src="${element.Poster}"/></a><h3>${element.Title}</h3>`;
-            list.appendChild(filmes);
-          });
-        }
-
-      }
-  
-      loadMoreBtn.addEventListener("click", () => {
-        paginaAtual++;
-        searchMovies();
-      });
-    </script>
-  </body>
+  <section>
+    <h2>Projetos</h2>
+    <p>Aqui você pode destacar os projetos que você realizou, mencionando suas responsabilidades, conquistas e resultados obtidos.</p>
+  </section>
+</body>
 </html>
