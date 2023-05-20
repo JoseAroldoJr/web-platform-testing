@@ -4,38 +4,92 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Currículo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/6040bf809c.js" crossorigin="anonymous"></script>
+
+  <title>Meu Currículo/Portfolio</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+
+    * {
       margin: 0;
       padding: 0;
+      font-family: Comic Sans MS, sans-serif;;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: ivory;
+
     }
 
     header {
       background-color: #162A3E;
       color: #fff;
-      padding: 20px;
+      padding: 40px;
     }
 
     h1 {
-      margin: 0;
+      text-align: center;
       font-size: 28px;
     }
 
     .contact {
       margin-top: 10px;
       font-size: 16px;
+      line-height: 2.5;
     }
 
     section {
       padding: 20px;
-      border-bottom: 1px solid #ccc;
+      line-height: 1.85;
     }
 
-    h2 {
+    h2.about {
+      background-color: #919ca7;
       margin: 0;
       font-size: 24px;
+      width: 9%;
+      padding: 10px 20px;
+    }
+
+    h2.abilities {
+      background-color: #919ca7;
+      margin: 0;
+      font-size: 24px;
+      width: 10%;
+      padding: 10px 20px;
+    }
+
+    h2.projects {
+      background-color: #919ca7;
+      margin: 0;
+      font-size: 24px;
+      width: 7%;
+      padding: 10px 20px;
+      
+    }
+
+    .icon-list {
+      display: flex;
+      justify-content: left;
+      align-items: left;
+      list-style-type: none;
+    }
+
+    .icon-list li {
+      display: flex;
+      align-items: left;
+      margin-right: 10px;
+      font-size: 20px;
+    }
+
+    .icon-list li i {
+      color: #6b7581 ;
+      margin-right: 10px;
+      font-size: 50px;
     }
 
     p {
@@ -46,25 +100,37 @@
 </head>
 <body>
   <header>
-    <h1>Seu Nome</h1>
+    <h1>Olá, me chamo José Aroldo, este é meu currículo online</h1>
     <div class="contact">
-      E-mail: seuemail@example.com | Telefone: (00) 1234-5678
+      <li><i class="far fa-envelope-open-text"></i> Email: <a href="jose.2020110977@unicap.br">jose.2020110977@unicap.br</a></li>
+      <li><i class="fab fa-github"></i> Github: <a href="https://github.com/JoseAroldoJr">https://github.com/JoseAroldoJr</a></li>
     </div>
   </header>
 
   <section>
-    <h2>Sobre Mim</h2>
-    <p>Aqui você pode falar um pouco sobre si mesmo, sua experiência, formação acadêmica, objetivos profissionais, etc.</p>
+    <h2 class="about">Sobre Mim</h2>
+    <p>Me chamo Jose Aroldo, tenho 22 anos, atualmente estudo ciências da computação
+      na Unicap e gosto bastante de esportes e competições.
+    </p>
   </section>
 
   <section>
-    <h2>Habilidades</h2>
-    <p>Aqui você pode listar as habilidades que você domina, como por exemplo: habilidades técnicas, conhecimentos em softwares, idiomas, etc.</p>
+    <h2 class="abilities">Habilidades</h2>
+    <p>As Tecnologias que domino estão representadas pelos icones abaixo:</p>
+    <ul class="icon-list">
+      <li><i class="fab fa-java"></i> Java</li>
+      <li><i class="fab fa-html5"></i> HTML5</li>
+      <li><i class="fab fa-css3-alt"></i> CSS3</li>
+      <li><i class="fas fa-database"></i> SQL</li>
+      <li><i class="fab fa-js"></i> JavaScript</li>
+    </ul>
   </section>
 
   <section>
-    <h2>Projetos</h2>
-    <p>Aqui você pode destacar os projetos que você realizou, mencionando suas responsabilidades, conquistas e resultados obtidos.</p>
+    <h2 class="projects">Projetos</h2>
+    <ul>
+      <li><a href="/siteComAPI/index.html">Site de busca de filmes</a></li>
+    </ul>
   </section>
 </body>
 </html>
